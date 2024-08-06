@@ -79,7 +79,7 @@ export default function Signup() {
   };
 
   return (
-    <div className="flex flex-col place-content-center items-center h-screen relative overflow-hidden section-main">
+    <div className="flex flex-col place-content-center items-center h-screen  relative overflow-hidden section-main">
       <div className="absolute lg:-top-32 lg:-right-10 lg:w-4/12 w-1/2 -top-16 -right-5 md:-top-32 md:-right-10">
         <img
           src="/images/top_background_corner.png"
