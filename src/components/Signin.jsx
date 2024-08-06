@@ -29,41 +29,24 @@ export default function Signin() {
     formState: { errors },
   } = useForm({ resolver: yupResolver(schema) });
 
-  const [apiError, setApiError] = useState("");
   const [showPassword, setShowPassword] = useState(false);
 
   const onSubmit = async (data) => {
     try {
-      // setApiError(""); 
-      // const response = await fetch("/api/sign-in", {
-      //   method: "POST",
-      //   headers: {
-      //     "Content-Type": "application/json",
-      //   },
-      //   body: JSON.stringify({ email: data.email }),
-      // });
-
-      setApiError(""); 
-      const response = await axios.post(
+        const response = await axios.post(
         "/api/v1/clients/signin",
         { username: data.username, password: data.password },
         { withCredentials: true }
       );
-  
-
-      const result = await response.json();
-
-      if (result.exists) {
-        setApiError("This name is used.Please use another name");
-      } else {
-        console.log(data); 
-      }
-    } catch (error) {
-      console.error("Error checking username:", error);
+       
+      console.log("Sign in successful:", data); 
+   
+    } 
+    catch (error) {
+      console.error("Error during sign-in:", error);
       setApiError("An error occurred. Please try again.");
     }
   };
-
   const capitalizeFirstLetter = (string) => {
     return string.charAt(0).toUpperCase() + string.slice(1);
   };
@@ -101,8 +84,6 @@ export default function Signin() {
           className="block w-full mb-1 border rounded-md border-gray-300 px-2 py-1.5 text-sm  focus:ring-gray-600 focus:border-gray-600 focus:outline-none focus:ring-1 bg-white"
         />
        {errors.username && (<p className="text-red-600 text-sm"> {capitalizeFirstLetter(errors.username.message)}</p>)}
-
-        {apiError && <p className="text-red-600 text-sm">{apiError}</p>}
         <div className="relative w-full">
           <input
             {...register("password")}
