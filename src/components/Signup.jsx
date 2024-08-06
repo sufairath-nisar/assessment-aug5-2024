@@ -13,7 +13,10 @@ const schema = yup
     firstName: yup.string().required('First name is required'),
     lastName: yup.string().required('Last name is required'),
     email: yup.string().email('Invalid email address').required('Email is required'),
-    phoneNumber: yup.string().required('Phone number is required'),
+    phoneNumber: yup
+      .string()
+      .matches(/^[0-9]+$/, 'Phone number must be a number')
+      .required('Phone number is required'),
     kitchenName: yup.string().required('Kitchen name is required'),
     password: yup
       .string()
@@ -97,10 +100,10 @@ export default function Signup() {
         <img src="/images/smn_logo.png" alt="logo" />
       </div>
 
-      <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-y-2 rounded-md p-6 md:w-1/2 place-items-center">
+      <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-y-2 rounded-md p-6 w-11/12 md:w-2/3 lg:w-1/2 place-items-center">
         <p className="text-sm font-extrabold text-slate-900 text-center mb-3">Sign up</p>
 
-        <div className="grid grid-cols-2 gap-4 mb-4">
+        <div className="grid md:grid-cols-2 grid-cols-1 gap-4 mb-4 w-full">
           <div className="flex flex-col">
             <input
               {...register("firstName")}
@@ -202,7 +205,7 @@ export default function Signup() {
 
         </div>
        
-        <Button type="submit" text="Sign up" className="w-1/4 py-2 mt-4 font-semibold" />
+        <Button type="submit" text="Sign up" className="md:w-2/5 w-2/3 py-2 mt-4 font-semibold" />
       </form>
     </div>
   );
